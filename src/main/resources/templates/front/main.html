@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja"  xmlns:th="http://www..thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ItemInfo</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="/css/svgstyle.css" th:href="@{/css/svgstyle.css}">
+</head>
+<body>
+    <div class="container" >
+        <h1 th:text="${username}">main</h1>
+        <form method="POST" th:object="${editForm}" th:action="@{/front/edit}">
+            <button type="submit" name="id" th:value="${id}">Edit</button>
+        </form>
+        <br>
+        <div class="row">
+            <div th:each="item : ${list}">
+                <div class="col-4">
+                    <img th:src="@{/icon/icon__${item.category}__-__${item.amount_score}__.svg}" alt="" class="" width="96" height="96">
+                    <div th:text="${item.itemname}"></div>
+                    <div th:text="${item.total_amount}"></div>
+                    <div th:text="${item.remaining_amount}"></div>
+                    <div th:text="${item.amount_score}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

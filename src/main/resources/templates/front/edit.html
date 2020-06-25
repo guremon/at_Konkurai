@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Edit</title>
+        <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+        <script type="text/javascript" src="/js/jquery-3.5.1.js"></script>
+        <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.tabledit.js"></script>
+        <script>
+        $(function(){
+            $(".submit").click(function () {
+                $('#go').submit();
+            });
+        });
+        </script>
+    </head>
+    <body>
+        <div class="container" id="app">
+            <h1>アイテム一覧</h1>
+            <div class="alert alert-success" role="alert" th:if="${updateAlert}" th:text="${updateAlert}"></div>
+            <div class="alert alert-danger" role="alert" th:if="${deleteAlert}" th:text="${deleteAlert}"></div>
+            <Form method="POST" th:object="${editForm}" th:action="@{/front/edit}" id="go">
+                <input type="hidden" th:value="${id}" name="id">
+                <table class="table table-striped" id="example1">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Total</th>
+                            <th>Remaining</th>
+                            <th>Unit</th>
+                            <th>Use</th>
+                            <th>Frequency</th>
+                            <th>Stock</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item, listStatus : ${list}">
+                            <td th:text="${item.itemId}"></td>
+                            <td th:text="${item.itemname}"></td>
+                            <td>
+                                <select name="category">
+                                <option value="1">A型</option>
+                                <option value="2">B型</option>
+                                </select>
+                            </td>
+                            <td th:text="${item.total_amount}"></td>
+                            <td th:text="${item.remaining_amount}"></td>
+                            <td th:text="${item.unit}"></td>
+                            <td th:text="${item.amount_to_use}"></td>
+                            <td th:text="${item.frequency_of_use}"></td>
+                            <td th:text="${item.stock}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </Form>
+        </div>
+        <script type="text/javascript" th:inline="javascript">
+            $("#example1").Tabledit({
+<!--                hideIdentifier: true,-->
+                columns: {
+                identifier: [0, "itemId"],
+                editable: [
+                [1, "itemname"],
+                [3, "total_amount"],
+                [4, "remaining_amount"],
+                [5, "unit"],
+                [6, "amount_to_use"],
+                [7, "frequency_of_use"],
+                [8, "stock"]
+                ]
+                }
+            });
+        </script>
+    </body>
+</html>
