@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+</head>
+
+<header th:fragment="header">
+    <nav class="navbar navbar-expand-sm navbar-light" style="background-color: #e0ffff;">
+        <div class="container">
+            <a class="navbar-brand" href="#">@Konkurai</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggler">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <form method="post" th:object="${editForm}" th:action="@{/front/top}" name="top">
+                        <input type="hidden" th:value="${id}" name="id" id="userId">
+                        <a class="nav-link" href="javascript:document.top.submit()">Top</a>
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form th:action="@{/front}" name="logout">
+                        <a class="nav-link" href="javascript:document.logout.submit()">Logout</a>
+                    </form>
+                </li>
+            </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+</html>

@@ -5,18 +5,22 @@
     <title>ItemInfo</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" href="/css/svgstyle.css" th:href="@{/css/svgstyle.css}">
+    <script type="text/javascript" src="/js/jquery-3.5.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </head>
 <body>
+    <div th:replace="common/header :: header"></div>
     <div class="container" >
         <h1 th:text="${username}">main</h1>
         <form method="POST" th:object="${editForm}" th:action="@{/front/edit}">
-            <button type="submit" name="id" th:value="${id}">Edit</button>
+            <button type="submit" class="btn btn-outline-success" name="id" th:value="${id}">Edit</button>
         </form>
         <br>
         <div class="row">
             <div th:each="item : ${list}">
-                <div class="col-4">
-                    <img th:src="@{/icon/icon__${item.category}__-__${item.amount_score}__.svg}" alt="" class="" width="96" height="96">
+                <div class="col-sm">
+                    <img th:src="@{/icon/icon__${item.category}__-__${item.amount_score}__.svg}" alt="" class="" width="150" height="150">
                     <div th:text="${item.itemname}"></div>
                     <div th:text="${item.total_amount}"></div>
                     <div th:text="${item.remaining_amount}"></div>

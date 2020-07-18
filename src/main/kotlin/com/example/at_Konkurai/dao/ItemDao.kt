@@ -9,4 +9,5 @@ interface ItemDao {
     fun findItemInfo(id: Int): List<Item>
     fun updateItemInfo(editForm: EditForm)
     fun deleteItemInfo(editForm: EditForm)
+    fun insertItem(editForm: EditForm)
 }

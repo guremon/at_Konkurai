@@ -3,7 +3,7 @@ package com.example.at_Konkurai.app
 import java.time.LocalDateTime
 
 class EditForm (
-        val id: Int,
+        val id: Int = 0,
         val itemId: Int = 0,
         val itemname: String = "",
         val category: Int = 0,

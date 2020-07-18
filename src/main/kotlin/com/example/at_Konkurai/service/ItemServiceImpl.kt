@@ -27,4 +27,8 @@ class ItemServiceImpl @Autowired constructor(private val itemDao: ItemDao): Item
     override fun deleteItemInfo(editForm: EditForm) {
         itemDao.deleteItemInfo(editForm)
     }
+
+    override fun insertItem(editForm: EditForm) {
+        itemDao.insertItem(editForm)
+    }
 }

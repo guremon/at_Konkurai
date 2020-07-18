@@ -107,4 +107,16 @@ class ItemDaoImpl @Autowired constructor(val jdbcTemplate: JdbcTemplate) : ItemD
     override fun deleteItemInfo(editForm: EditForm) {
         jdbcTemplate.update("DELETE FROM item WHERE id = ? AND itemId = ?", editForm.id, editForm.itemId)
     }
+
+    override fun insertItem(editForm: EditForm) {
+        jdbcTemplate.update("INSERT INTO item (id, itemname, category, total_amount, remaining_amount, unit, " +
+                "amount_to_use, amount_score, frequency_of_use, stock, registeredDateTime, lastModifiedDateTime) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                 editForm.id, editForm.itemname, editForm.category, editForm.total_amount, editForm.remaining_amount, editForm.unit,
+                editForm.amount_to_use, editForm.amount_score, editForm.frequency_of_use, editForm.stock, LocalDateTime.now(), LocalDateTime.now())
+
+//        val findItemQuery = "SELECT itemId FROM item WHERE id = ? AND itemname = ?"
+//        val result = jdbcTemplate.queryForList(findItemQuery, editForm.id, editForm.itemname)
+//        return result[0]["itemId"] as Int
+    }
 }

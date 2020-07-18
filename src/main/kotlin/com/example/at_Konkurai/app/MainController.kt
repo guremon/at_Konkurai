@@ -19,11 +19,24 @@ class MainController @Autowired constructor(private val itemService: ItemService
         return "front/index"
     }
 
+    @PostMapping("/top")
+    fun backLogin(model: Model, loginForm: LoginForm, editForm: EditForm): String {
+        if (editForm.id != 0) {
+            itemService.makeTodayItemInfo(editForm.id)
+            val itemList = itemService.findItemInfo(editForm.id)
+
+            model.addAttribute("id", editForm.id)
+            model.addAttribute("list", itemList)
+            return ("front/main")
+        }
+        model.addAttribute("title", "ログインしてください")
+        return "front/index"
+    }
+
     @PostMapping("/main")
     fun showContents(model: Model,
                      loginForm: LoginForm,
-                     redirectAttributes: RedirectAttributes
-    ): String {
+                     redirectAttributes: RedirectAttributes): String {
         val userId = itemService.findUser(loginForm.username, loginForm.password)
         if (userId == 0) {
             redirectAttributes.addFlashAttribute("reLogin", "ユーザが見つかりませんでした。ユーザネーム、パスワードを確認してください。")
@@ -49,7 +62,7 @@ class MainController @Autowired constructor(private val itemService: ItemService
         return ("front/edit")
     }
 
-    @PostMapping("update")
+    @PostMapping("/update")
      fun update(model: Model, editForm: EditForm): String {
 
          if (editForm.itemname != "") {
@@ -66,7 +79,7 @@ class MainController @Autowired constructor(private val itemService: ItemService
          return ("front/edit")
      }
 
-     @PostMapping("delete")
+     @PostMapping("/delete")
      fun delete(model: Model, editForm: EditForm): String {
 
          if (editForm.itemname != "") {
@@ -82,4 +95,21 @@ class MainController @Autowired constructor(private val itemService: ItemService
          model.addAttribute("list", itemList)
          return ("front/edit")
      }
+
+    @PostMapping("/insert")
+    fun insert(model: Model, editForm: EditForm): String {
+        model.addAttribute("id", editForm.id)
+
+        if (editForm.itemname != "") {
+            itemService.insertItem(editForm)
+
+            val itemList = itemService.findItemInfo(editForm.id)
+            model.addAttribute("list", itemList)
+            return ("front/edit")
+        }
+
+        val itemList = itemService.findItemInfo(editForm.id)
+        model.addAttribute("list", itemList)
+        return ("front/edit")
+    }
 }

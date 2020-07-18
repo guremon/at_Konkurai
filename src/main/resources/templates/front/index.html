@@ -4,8 +4,16 @@
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+    <script type="text/javascript" src="/js/jquery-3.5.1.js"></script>
 </head>
 <body>
+    <header th:fragment="loginheader">
+        <nav class="navbar navbar-light" style="background-color: #e0ffff;">
+            <div class="container">
+                    <a class="navbar-brand" href="#">@Konkurai</a>
+            </div>
+        </nav>
+    </header>
     <div class="container">
         <h1 th:text="${title}">a</h1>
         <div class="alert alert-success" role="alert" th:if="${reLogin}" th:text="${reLogin}"></div>
